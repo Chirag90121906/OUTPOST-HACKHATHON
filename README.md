@@ -1,8 +1,8 @@
 # GRANTLY — Discover Opportunities. Unlock Your Future.
 
-GRANTLY is a unified scholarship discovery and management platform that helps students discover relevant scholarship opportunities, understand eligibility, manage applications, organize documents, receive deadline reminders, and track progress through a single platform.
+GRANTLY is a scholarship discovery and application management platform designed to help students find relevant opportunities, understand eligibility transparently, prepare documents, and track application progress through role-based experiences.
 
-> **Hackathon note:** This repository was built as a premium, demo-ready product implementation. Scholarship listings seeded in development are **sample/demo data** and are clearly labeled in the UI. Always verify official eligibility, deadlines, and application links on provider websites.
+> **Hackathon/rules note (important):** The project owner reported that the Outpost hackathon specifies **backend development is not allowed**. This repository currently implements a **Next.js + Prisma + Vercel Postgres + API routes** architecture. That may conflict with competition rules. Do **not** treat this README as a claim of rule compliance. See [`SCORE_IMPROVEMENT_PLAN.md`](./SCORE_IMPROVEMENT_PLAN.md), [`ARCHITECTURE.md`](./ARCHITECTURE.md), [`FEATURES.md`](./FEATURES.md), and [`DEMO_GUIDE.md`](./DEMO_GUIDE.md). Scholarship listings/accounts/statuses may be **sample/demo** and must be clearly labeled; never treat simulated states as official provider decisions.
 
 ## Problem Statement
 
