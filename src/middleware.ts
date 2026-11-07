@@ -20,9 +20,9 @@ export async function middleware(req: NextRequest) {
     const url = req.nextUrl.clone(); url.pathname = "/login"; url.searchParams.set("next", pathname);
     return NextResponse.redirect(url);
   }
-  if (pathname.startsWith("/admin") && role !== "ADMIN") return NextResponse.redirect(new URL(role ? "/" : "/login", req.url));
-  if (pathname.startsWith("/provider") && role !== "PROVIDER" && role !== "ADMIN") return NextResponse.redirect(new URL(role ? "/" : "/login", req.url));
-  if (pathname.startsWith("/student") && role !== "STUDENT" && role !== "ADMIN") return NextResponse.redirect(new URL(role ? "/" : "/login", req.url));
+  if (pathname.startsWith("/admin") && role !== "ADMIN") return NextResponse.redirect(new URL(role ? "/forbidden" : "/login?role=ADMIN", req.url));
+  if (pathname.startsWith("/provider") && role !== "PROVIDER" && role !== "ADMIN") return NextResponse.redirect(new URL(role ? "/forbidden" : "/login?role=PROVIDER", req.url));
+  if (pathname.startsWith("/student") && role !== "STUDENT" && role !== "ADMIN") return NextResponse.redirect(new URL(role ? "/forbidden" : "/login?role=STUDENT", req.url));
   return NextResponse.next();
 }
 

@@ -31,7 +31,7 @@ export function SiteNav() {
         </nav>
         <div className="hidden items-center gap-2 md:flex">
           <Link href="/login"><Button variant="ghost">Login</Button></Link>
-          <Link href="/register"><Button>Get Started</Button></Link>
+          <Link href="/get-started"><Button>Get Started</Button></Link>
         </div>
         <button className="rounded-lg p-2 md:hidden" aria-label="Toggle menu" onClick={() => setOpen((v) => !v)}>{open ? <X /> : <Menu />}</button>
       </div>
@@ -41,7 +41,7 @@ export function SiteNav() {
             {links.map((l) => <Link key={l.href} href={l.href} onClick={() => setOpen(false)} className="rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">{l.label}</Link>)}
             <div className="mt-3 grid grid-cols-2 gap-2">
               <Link href="/login" onClick={() => setOpen(false)}><Button variant="outline" className="w-full">Login</Button></Link>
-              <Link href="/register" onClick={() => setOpen(false)}><Button className="w-full">Get Started</Button></Link>
+              <Link href="/get-started" onClick={() => setOpen(false)}><Button className="w-full">Get Started</Button></Link>
             </div>
           </div>
         </div>

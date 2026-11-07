@@ -8,6 +8,7 @@ import { deadlineLabel, formatCurrency, formatDate } from "@/lib/utils";
 import { getSession } from "@/lib/auth";
 import { matchScholarship } from "@/lib/matching";
 import { ScholarshipActions } from "@/components/scholarships/scholarship-actions";
+import { ReportListing } from "@/components/scholarships/report-listing";
 
 export const dynamic = "force-dynamic";
 
@@ -31,7 +32,7 @@ export default async function ScholarshipDetailsPage({ params }: { params: Promi
                   <p className="text-sm font-medium text-slate-500">{s.providerName}</p>
                   <h1 className="mt-1 text-2xl font-bold tracking-tight sm:text-3xl">{s.title}</h1>
                 </div>
-                <div className="flex flex-wrap gap-2"><Badge tone={d.tone}>{d.text}</Badge>{s.isDemo && <Badge>Sample data</Badge>}</div>
+                <div className="flex flex-wrap gap-2"><Badge tone={d.tone}>{d.text}</Badge>{s.isDemo && <Badge>Sample data</Badge>}<Badge tone={s.isVerified ? "success" : "neutral"}>{s.isVerified ? "Verified listing" : "Pending/Unverified"}</Badge></div>
               </div>
               <div className="mt-4 flex flex-wrap gap-4 text-sm text-slate-600">
                 <span className="flex items-center gap-1.5"><IndianRupee size={16} /> {formatCurrency(s.amount, s.currency)}</span>
@@ -63,7 +64,8 @@ export default async function ScholarshipDetailsPage({ params }: { params: Promi
             <div className="mt-4">
               <ScholarshipActions id={s.id} officialUrl={s.officialUrl} isLoggedIn={!!session} />
             </div>
-            <div className="mt-4 rounded-xl bg-amber-50 p-3 text-xs text-amber-800">This listing may be demo/sample data. Always verify eligibility, deadlines, and links on the official provider website.</div>
+            <div className="mt-4 rounded-xl bg-amber-50 p-3 text-xs text-amber-800">This listing may be demo/sample data. Always verify eligibility, deadlines, and links on the official provider website. Never pay suspicious fees without verifying the official source.</div>
+            <ReportListing scholarshipId={s.id} />
           </Card>
           <Card className="p-5">
             <div className="font-semibold flex items-center gap-2"><BadgeCheck size={16} className="text-success"/> Eligibility check</div>

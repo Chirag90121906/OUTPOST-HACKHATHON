@@ -16,6 +16,10 @@ const schema = z.object({
   course: z.string().optional(),
   graduationYear: z.coerce.number().int().optional(),
   role: z.enum(["STUDENT", "PROVIDER"]).optional(),
+  organization: z.string().optional(),
+  organizationType: z.string().optional(),
+  website: z.string().optional(),
+  contactPerson: z.string().optional(),
 }).refine((d) => d.password === d.confirmPassword, { message: "Passwords do not match", path: ["confirmPassword"] });
 
 export async function POST(req: NextRequest) {
@@ -40,7 +44,7 @@ export async function POST(req: NextRequest) {
             completionPercent: [body.educationLevel, body.institution, body.course].filter(Boolean).length * 15,
           },
         } : undefined,
-        provider: role === Role.PROVIDER ? { create: { organization: body.institution || body.name, verified: false } } : undefined,
+        provider: role === Role.PROVIDER ? { create: { organization: body.organization || body.institution || body.name, website: body.website || null, description: body.organizationType ? `Type: ${body.organizationType}` : null, contactEmail: body.email.toLowerCase(), verified: false } } : undefined,
       },
       select: { id: true, name: true, email: true, role: true },
     });
