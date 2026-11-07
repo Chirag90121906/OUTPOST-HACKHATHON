@@ -25,7 +25,7 @@
 - [x] Security/accessibility: server-side authz on new routes, file validation, private document serving, labels/ARIA on key controls, `tsc`/build verified
 - [ ] Remaining depth: full 40-page deep workflows, email/reset delivery, rich analytics charts, full provider workflows, end-to-end tests, formal Lighthouse/WCAG evidence, dependency audit remediation
 - [x] GitHub: all changes committed and pushed after verified build
-- [ ] Vercel deployment — **blocked** (no Vercel auth/token/CLI login available here). Repo is Vercel + Vercel Postgres ready; user must import project in Vercel and set `AUTH_SECRET`, `APP_URL`, Postgres env vars.
+- [ ] Vercel deployment — **trigger-ready**: GitHub is pushed (`main`). User reports GitHub connected to Vercel; a push can trigger auto-deploy only if the repo is imported as a Vercel project with required env vars/storage configured. Agent cannot verify Vercel dashboard state (no Vercel auth).
 
 ## Verification log
 - 2026-04: build passed; pushed; Prisma switched to Vercel Postgres; build passed.
