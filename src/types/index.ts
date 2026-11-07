@@ -1,0 +1,11 @@
+export type Role = "STUDENT" | "ADMIN" | "PROVIDER";
+export const APPLICATION_STAGES = [
+  "DRAFT",
+  "SUBMITTED",
+  "UNDER_REVIEW",
+  "DOCUMENTS_REQUIRED",
+  "SHORTLISTED",
+  "APPROVED",
+  "REJECTED",
+  "WITHDRAWN",
+] as const;

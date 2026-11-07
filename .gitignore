@@ -1,0 +1,47 @@
+# dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# next
+.next/
+out/
+build/
+dist/
+
+# env
+.env
+.env*.local
+!.env.example
+
+# prisma
+prisma/dev.db
+prisma/dev.db-journal
+*.db
+*.db-journal
+
+# uploads (private)
+uploads/
+private-uploads/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# testing
+coverage/
+.playwright/
+
+# vercel
+.vercel
