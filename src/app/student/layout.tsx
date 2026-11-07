@@ -17,6 +17,7 @@ const nav = [
   { href: "/student/achievements", label: "Achievements" },
   { href: "/student/notifications", label: "Notifications" },
   { href: "/student/copilot", label: "AI Copilot" },
+  { href: "/student/location", label: "Location Settings" },
   { href: "/student/settings", label: "Settings" },
 ];
 

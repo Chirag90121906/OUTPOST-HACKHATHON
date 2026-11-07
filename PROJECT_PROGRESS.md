@@ -12,6 +12,8 @@
 - [x] **Admin portal expanded:** overview with real aggregates (students/providers/scholarships/active/pending verification/applications/reported), Manage Students/Providers, Scholarship Verification (pending providers/unverified scholarships), Reported Listings, Categories, Notifications, existing scholarships/applications/analytics/settings routes retained.
 - [x] **Guest/public + trust:** `/forbidden` page; scholarship details shows clearer verification/pending badges and suspicious-fee warning; `ReportListing` component + `POST /api/report` stores reports in `Review` model (type `report`).
 - [x] **Global theme preserved:** Royal Navy + Champagne Gold tokens applied via shared UI/layout; nav “Get Started” routes to role selection.
+- [x] **Optional location settings:** Student Location Settings page supports browser permission status, one-time current-location lookup, manual city/state entry, update, and clear. Only city/state are saved; precise coordinates are sent to OpenStreetMap for reverse geocoding and are not persisted.
+- [x] **Regional discovery:** Public Explore and student discovery accept state filters; student discovery defaults to the saved profile state and includes unrestricted/nationwide opportunities.
 - [x] **Verification:** `npx tsc --noEmit` passed; `POSTGRES_PRISMA_URL=... POSTGRES_URL_NON_POOLING=... npm run build` passed (all new routes compiled).
 
 ## Transformation checklist (Royal Navy + Champagne Gold)
@@ -19,20 +21,22 @@
 - [x] Premium hero, global nav/cards/buttons/footer theme, responsive layouts
 - [x] Student dashboard: sidebar/mobile bottom nav, match radar visual, pipeline/health/planner/calendar/funding/doc readiness/activity/notifications, achievements unlock, command palette
 - [x] Student workflows preserved: auth, explore/details, save/draft/submit, eligibility display, compare, documents (private/validated), assistant (grounded fallback)
+- [x] Optional city/state preferences and regional discovery filter; exact location is not stored
 - [x] Admin scholarship CRUD/support/audit foundations retained
 
 ## Honest remaining gaps / blocked
-- **Production data blocked** until Vercel project `outpost-hackhathon` has real Vercel Postgres connected and env vars set (`POSTGRES_PRISMA_URL`, `POSTGRES_URL_NON_POOLING`, `AUTH_SECRET`, `APP_URL`), then `npx prisma db push` (+ optional `npm run prisma:seed` demo-only).
+- **Database-backed behavior blocked locally and in production** until `POSTGRES_PRISMA_URL`, `POSTGRES_URL_NON_POOLING`, `AUTH_SECRET`, and `APP_URL` are configured and the Vercel project `outpost-hackhathon` has a real Postgres database connected; then run `npx prisma db push` (+ optional `npm run prisma:seed` demo-only). The local browser check confirmed the missing database URL prevents live scholarship queries.
 - Agent cannot verify Vercel dashboard state (storage/env/protection/GitHub integration) beyond CLI deploys/curls.
 - No screenshot was attached; design follows requested Royal Navy + Champagne Gold spec.
-- Not fully implemented: OCR/authenticity verification, real LLM API, i18n EN/HI/GU, community/mentorship moderation depth, full Kanban DnD persistence across all states, exports/PWA depth, complete 40+ deep workflows, formal Lighthouse/Core Web Vitals/WCAG 2.2 AA/device screenshot matrix, full dependency security audit/remediation, MFA/secure password-recovery delivery.
+- Not fully implemented: OCR/authenticity verification, real LLM API, i18n EN/HI/GU, community/mentorship moderation depth, full Kanban DnD persistence across all states, exports/PWA depth, complete 40+ deep workflows, formal Lighthouse/Core Web Vitals/WCAG 2.2 AA/device screenshot matrix, full dependency security audit/remediation, MFA/secure password-recovery delivery. Browser geolocation behavior and external reverse-geocoding availability still require an interactive browser test with location permission enabled.
 - Some provider/admin pages are functional summaries (real data where available) rather than full CRUD/audit UIs for every action.
 
 ## GitHub / Vercel status
 - **Latest pushed before this pass:** `5b040f7` (feat: premium hero, mobile nav, command palette, match radar visual, achievement unlock)
-- **This pass:** verify, update progress, commit, push, deploy to production project `outpost-hackhathon` (see git log for new hash after commit).
+- **Location-settings changes:** local only; not committed, pushed, or deployed. A production push/deploy is not claimed or performed in this pass.
 - **Local `.vercel/project.json`:** linked to `grantly`; production deploys use `npx vercel deploy --prod --yes --project outpost-hackhathon`.
 
 ## Verification log
 - 2026-04: Postgres/Vercel config; Royal Navy/Gold redesign; student dashboard/features; premium hero/mobile nav/radar/achievement; build passed; pushed.
-- 2026-04 (this pass): role selection + role-aware auth UX, `/forbidden`, provider/admin portals and scoped APIs, report listing flow, middleware/admin layout updates; `tsc --noEmit` and dummy-env `npm run build` **passed**. Commit/push/deploy recorded after execution.
+- 2026-04: role selection + role-aware auth UX, `/forbidden`, provider/admin portals and scoped APIs, report listing flow, middleware/admin layout updates; `tsc --noEmit` and dummy-env `npm run build` **passed**. Commit/push/deploy were recorded after that earlier implementation pass.
+- 2026-11: Added optional browser location permissions, current-location reverse lookup, manual city/state preferences, secure profile-scoped persistence, and state-specific scholarship discovery. Focused location tests (4/4), typecheck, and production build passed. Browser permission and live geocoding flows were not interactively tested.
