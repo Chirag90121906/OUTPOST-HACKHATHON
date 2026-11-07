@@ -5,6 +5,11 @@ import { ok, fail } from "@/lib/api";
 export async function GET(req: NextRequest) {
   try {
     const sp = req.nextUrl.searchParams;
+    const ids = sp.get("ids")?.split(",").map((s) => s.trim()).filter(Boolean);
+    if (ids && ids.length) {
+      const items = await prisma.scholarship.findMany({ where: { id: { in: ids.slice(0, 8) } }, include: { category: true } });
+      return ok({ items });
+    }
     const q = sp.get("q")?.trim();
     const category = sp.get("category");
     const level = sp.get("level");

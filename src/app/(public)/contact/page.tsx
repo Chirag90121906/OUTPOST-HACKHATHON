@@ -1,1 +1,13 @@
-import { Card } from "@/components/ui/card"; import { Input, Label, Textarea } from "@/components/ui/input"; import { Button } from "@/components/ui/button"; export const metadata={title:"Contact"}; export default function Page(){return (<div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8"><h1 className="text-3xl font-bold tracking-tight">Contact & Support</h1><p className="mt-2 text-slate-600">Questions, feedback, or incorrect listing reports.</p><Card className="mt-8 p-6"><form className="space-y-4"><div className="grid gap-4 sm:grid-cols-2"><div><Label>Name</Label><Input /></div><div><Label>Email</Label><Input type="email" /></div></div><div><Label>Subject</Label><Input /></div><div><Label>Message</Label><Textarea rows={5} /></div><Button type="button">Submit (connect support backend in production)</Button></form></Card></div>);}
+import { Card } from "@/components/ui/card";
+import { ContactForm } from "./contact-form";
+
+export const metadata = { title: "Contact" };
+export default function Page() {
+  return (
+    <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+      <h1 className="text-3xl font-bold tracking-tight">Contact & Support</h1>
+      <p className="mt-2 text-slate-600">Questions, feedback, or incorrect listing reports. Messages are stored securely in the platform database.</p>
+      <Card className="mt-8 p-6"><ContactForm /></Card>
+    </div>
+  );
+}

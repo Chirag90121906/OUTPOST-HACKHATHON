@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { formatDate, deadlineLabel } from "@/lib/utils";
+import { AssistantPanel } from "@/components/dashboard/assistant";
 
 export const dynamic = "force-dynamic";
 
@@ -44,16 +45,19 @@ export default async function StudentDashboard() {
             {apps.length === 0 && <div className="rounded-xl bg-slate-50 p-4 text-sm text-slate-600">No applications yet. Explore scholarships and start with a draft.</div>}
           </div>
         </Card>
-        <Card className="p-5 sm:p-6">
-          <h3 className="font-semibold">Upcoming deadlines</h3>
-          <div className="mt-4 space-y-3">
-            {scholarships.map((s: any) => { const d = deadlineLabel(s.deadline); return (
-              <Link key={s.id} href={`/scholarships/${s.id}`} className="block rounded-xl border p-3 hover:bg-slate-50">
-                <div className="flex items-start justify-between gap-2"><span className="text-sm font-medium">{s.title}</span><Badge tone={d.tone}>{d.text}</Badge></div>
-              </Link>
-            );})}
-          </div>
-        </Card>
+        <div className="space-y-6">
+          <Card className="p-5 sm:p-6">
+            <h3 className="font-semibold">Upcoming deadlines</h3>
+            <div className="mt-4 space-y-3">
+              {scholarships.map((s: any) => { const d = deadlineLabel(s.deadline); return (
+                <Link key={s.id} href={`/scholarships/${s.id}`} className="block rounded-xl border p-3 hover:bg-slate-50">
+                  <div className="flex items-start justify-between gap-2"><span className="text-sm font-medium">{s.title}</span><Badge tone={d.tone}>{d.text}</Badge></div>
+                </Link>
+              );})}
+            </div>
+          </Card>
+          <AssistantPanel />
+        </div>
       </div>
     </div>
   );

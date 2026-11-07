@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, BadgeCheck, Calendar, ExternalLink, FileText, Globe, IndianRupee } from "lucide-react";
+import { ArrowLeft, BadgeCheck, Calendar, FileText, IndianRupee } from "lucide-react";
 import { prisma } from "@/lib/db";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { deadlineLabel, formatCurrency, formatDate } from "@/lib/utils";
 import { getSession } from "@/lib/auth";
+import { matchScholarship } from "@/lib/matching";
+import { ScholarshipActions } from "@/components/scholarships/scholarship-actions";
 
 export const dynamic = "force-dynamic";
 
@@ -14,6 +15,8 @@ export default async function ScholarshipDetailsPage({ params }: { params: Promi
   const { id } = await params;
   const [s, session] = await Promise.all([prisma.scholarship.findUnique({ where: { id }, include: { category: true } }), getSession()]);
   if (!s) notFound();
+  const profile = session ? await prisma.studentProfile.findUnique({ where: { userId: session.id } }).catch(() => null) : null;
+  const match = session ? matchScholarship(profile || {}, s) : null;
   const d = deadlineLabel(s.deadline);
   const docs = (s.requiredDocuments || "").split(",").map((x) => x.trim()).filter(Boolean);
   return (
@@ -56,17 +59,25 @@ export default async function ScholarshipDetailsPage({ params }: { params: Promi
         <div className="space-y-4 lg:sticky lg:top-24 lg:self-start">
           <Card className="p-5">
             <CardTitle>Take action</CardTitle>
-            <p className="mt-2 text-sm text-slate-600">Save, check eligibility in your dashboard, and track your application progress.</p>
-            <div className="mt-4 grid gap-2">
-              <Link href={session ? `/student/applications?apply=${s.id}` : `/login?next=/scholarships/${s.id}`}><Button className="w-full">Apply / Track</Button></Link>
-              <Link href={session ? `/student/saved?save=${s.id}` : `/login?next=/scholarships/${s.id}`}><Button variant="outline" className="w-full">Save Scholarship</Button></Link>
-              {s.officialUrl && <a href={s.officialUrl} target="_blank" rel="noreferrer"><Button variant="ghost" className="w-full"><Globe size={16}/> Official Website <ExternalLink size={14}/></Button></a>}
+            <p className="mt-2 text-sm text-slate-600">Save, draft, submit (demo workflow), and compare opportunities.</p>
+            <div className="mt-4">
+              <ScholarshipActions id={s.id} officialUrl={s.officialUrl} isLoggedIn={!!session} />
             </div>
             <div className="mt-4 rounded-xl bg-amber-50 p-3 text-xs text-amber-800">This listing may be demo/sample data. Always verify eligibility, deadlines, and links on the official provider website.</div>
           </Card>
           <Card className="p-5">
-            <div className="font-semibold flex items-center gap-2"><BadgeCheck size={16} className="text-success"/> Eligibility guidance</div>
-            <p className="mt-2 text-sm text-slate-600">Log in and complete your profile for an explainable match result (Eligible, Potentially Eligible, Not Eligible, or Insufficient Information).</p>
+            <div className="font-semibold flex items-center gap-2"><BadgeCheck size={16} className="text-success"/> Eligibility check</div>
+            {!match ? (
+              <p className="mt-2 text-sm text-slate-600">Log in and complete your profile for an explainable match result (Eligible, Potentially Eligible, Not Eligible, or Insufficient Information).</p>
+            ) : (
+              <div className="mt-3 space-y-2 text-sm">
+                <div className="flex items-center gap-2"><Badge tone={match.status === "Eligible" ? "success" : match.status === "Not Eligible" ? "danger" : match.status === "Potentially Eligible" ? "warning" : "neutral"}>{match.status}</Badge><span className="text-slate-500">Score {match.score}%</span></div>
+                {match.reasons.slice(0, 3).map((r) => <p key={r} className="text-slate-700">• {r}</p>)}
+                {match.missing.length > 0 && <p className="text-amber-700"><strong>Missing:</strong> {match.missing.join(", ")}</p>}
+                {match.failed.length > 0 && <p className="text-red-700"><strong>Review:</strong> {match.failed[0]}</p>}
+                <Link href="/student/profile" className="inline-block pt-1 text-secondary underline">Update profile</Link>
+              </div>
+            )}
           </Card>
         </div>
       </div>

@@ -46,3 +46,6 @@ coverage/
 # vercel
 .vercel
 tsconfig.tsbuildinfo
+
+# private runtime data
+data/
