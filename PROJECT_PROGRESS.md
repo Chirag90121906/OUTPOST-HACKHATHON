@@ -6,7 +6,9 @@
 - **Production target:** Vercel project `outpost-hackhathon` → https://outpost-hackhathon.vercel.app/ (requires real Postgres/env vars for functional data)
 
 ## Latest transformation (implemented, build-verified)
-- [x] **Homepage complete redesign (alternating sections):** Deep Navy hero (white/gold highlights, animated reveal/floating accents, premium scholarship search, Explore/Get Started CTAs, dashboard preview) → Ivory Statistics (real DB counts, labeled) → Deep Navy Featured Scholarships (real published listings/branded empty state) → Ivory Categories → Deep Navy How It Works → Ivory Why Choose GRANTLY → Deep Navy AI Copilot preview → Ivory Opportunity Passport preview → Deep Navy Application Tracking → Ivory Trust & Verification statuses → Deep Navy Testimonials (**clearly labeled demo**) → Ivory FAQ (accessible accordion, `HomeFaq`) → Deep Navy Final CTA. Footer redesigned to Deep Navy with gold accents/links.
+- [x] **Featured Scholarships fix (public-safe):** removed exposed developer commands (`prisma db push` / `npm run prisma:seed`) from the public homepage. When published scholarships exist, shows up to 4 real DB-backed `ScholarshipCard` listings. When none exist, shows a premium branded empty state: “Your Next Scholarship Opportunity **Starts Here**” + three readiness cards (Check Your Eligibility → profile/get-started; Prepare Your Documents with common examples only + Open Document Vault; Never Miss a Deadline + Explore Scholarships) and prominent “Explore All Scholarships →”. Developer setup remains in docs/config, not UI.
+- [x] **Get Scholarship Ready (compact):** added session-aware readiness section — guests see intro + Get Started (no fake percentages); logged-in students see readiness using actual `StudentProfile.completionPercent` and `Document` count from DB.
+- [x] **Homepage alternating rhythm maintained** (adjusted section sequence/colors to preserve intentional Deep Navy/Ivory alternation after inserting readiness): hero, statistics, featured scholarships, readiness, categories, how it works, why choose, AI copilot, opportunity passport, application tracking, trust/verification, testimonials (**demo-labeled**), FAQ, final CTA, navy footer.
 - [x] **Global consistency pass:** Royal Navy + Champagne Gold tokens preserved (`#101C36`, `#233F70`, `#D6B56D`, `#F8F7F2`, `#FFFFFF`, `#64748B`, `#252D3A`), Plus Jakarta Sans + Inter; nav/footer/hero CTAs aligned to `/get-started`; targeted token cleanup in `src/app/(public)` and `src/app/(auth)`.
 - [x] **Four-role auth UX + RBAC:** `/get-started`, role-aware login/register, provider registration fields, `/forbidden`, middleware role redirects, scoped provider/admin/student APIs/pages.
 - [x] **Provider/admin portals:** scoped provider scholarships/applications/status workflows; admin overview/students/providers/verification/reported/categories/notifications.
@@ -23,9 +25,10 @@
 - Testimonials on homepage are **clearly labeled demo** content.
 
 ## GitHub / Vercel status
-- **Latest pushed:** `856002e` (`Add student location intelligence and integrate location-aware discovery`) at time of writing before this commit.
-- **This pass:** homepage alternating redesign + footer + FAQ + consistency cleanup + progress update — commit/push after verification; **Vercel deploy pending user authorization**.
-- **Local `.vercel/project.json`:** linked to `grantly`; production deploys use `npx vercel deploy --prod --yes --project outpost-hackhathon`.
+- **Latest pushed before this fix:** `a890481` (`Complete premium Navy/Gold homepage redesign with alternating sections`).
+- **Vercel deploy (authorized, completed):** `npx vercel deploy --prod --yes --project outpost-hackhathon` finished **READY** — deployment `dpl_CGkgbtLkVzdkR17jgU58jysC9hLZ`, `https://outpost-hackhathon-dkup6tzos-bhanushalichirag02-1848.vercel.app`, aliased to `https://outpost-hackhathon.vercel.app`. This deployment reflects the code state uploaded at deploy start (before this homepage/readiness fix was committed/pushed).
+- **This fix:** removes exposed Prisma commands, adds Scholarship Readiness/guest-vs-student behavior — **build/typecheck verified locally; commit/push to GitHub now.** Deploy to Vercel again if you want this fix live (authorize and I’ll run `vercel deploy --prod --yes --project outpost-hackhathon`, or let GitHub integration auto-deploy if configured).
+- **Local `.vercel/project.json`:** linked to `grantly`; production deploys use `--project outpost-hackhathon`.
 
 ## Verification log
 - 2026-04: foundation, Postgres/Vercel config, Royal Navy/Gold redesign, student dashboard/features, four-role auth/provider/admin portals, location foundations, builds passed, pushed.
