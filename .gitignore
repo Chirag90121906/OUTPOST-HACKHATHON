@@ -45,3 +45,4 @@ coverage/
 
 # vercel
 .vercel
+tsconfig.tsbuildinfo

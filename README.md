@@ -154,17 +154,26 @@ Executed in this environment:
 
 Recommended additional checks before production: ESLint full pass, unit/integration tests (Vitest scaffold available), accessibility audits (Lighthouse/axe), responsive QA at required breakpoints, API negative tests, and deployment smoke tests.
 
-## Vercel Deployment
+## Vercel Deployment (Vercel Postgres)
 
-1. Push repository to GitHub.
-2. Import project in Vercel.
-3. Set environment variables (`DATABASE_URL`, `AUTH_SECRET`, `APP_URL`). For production, use a managed database (e.g., Vercel Postgres/Neon/Supabase) instead of local SQLite.
-4. Build command: `npm run build` (default).
-5. Ensure Prisma migrations are applied for the production database (`prisma migrate deploy`) in your release process.
-6. Verify CORS/cookies/auth behavior on the deployed domain.
+This repo is configured for **Vercel Postgres** (`prisma/schema.prisma` uses `postgresql` with `POSTGRES_PRISMA_URL` and `POSTGRES_URL_NON_POOLING`).
 
-**Important:** SQLite (`file:./dev.db`) is suitable for local development; serverless production environments require a hosted database.
+1. Push repository to GitHub (done: https://github.com/Chirag90121906/OUTPOST-HACKHATHON).
+2. In Vercel: **Add New → Project → Import** `OUTPOST-HACKHATHON` (sign in with GitHub).
+3. In the Vercel project: **Storage → Create Database → Postgres** and connect it to the project. Vercel will add `POSTGRES_PRISMA_URL`, `POSTGRES_URL_NON_POOLING`, etc.
+4. Add app env vars:
+   - `AUTH_SECRET` = long random value (`openssl rand -base64 32`)
+   - `APP_URL` = your deployed URL (e.g. `https://outpost-hackhathon.vercel.app`)
+5. Initialize the database schema (first time). From your local machine with Vercel env vars pulled, or via Vercel CLI:
+   ```bash
+   npx vercel env pull .env.local
+   npx prisma db push
+   npm run prisma:seed   # optional demo data; use only for demo environments
+   ```
+   For production migrations, use `prisma migrate dev` (locally, creating migrations) then `prisma migrate deploy` in CI/CD.
+6. Deploy. After deploy, verify `/`, `/explore`, `/login`, `/register`, student/admin flows, and check logs for DB/auth errors.
 
+**Important:** Never use SQLite on Vercel. Keep `AUTH_SECRET` private. Demo seed accounts are for non-production demos only.
 ## Known Limitations / Next Improvements
 
 - Some modules are scaffolded with consistent UI and role protection but need deeper CRUD/workflow implementation (advanced admin/provider operations, full document upload storage pipeline, calendar exports, email provider integration).
