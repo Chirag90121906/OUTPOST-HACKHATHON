@@ -18,11 +18,11 @@ export function SiteNav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   return (
-    <header className="sticky top-0 z-40 border-b border-white/60 bg-[#f7f8fc]/80 backdrop-blur-xl">
+    <header className="sticky top-0 z-40 border-b border-[#101c36]/10 bg-[#f8f7f2]/88 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2.5 font-bold text-primary">
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-white"><GraduationCap size={18} /></span>
-          <span className="text-lg tracking-tight">GRANTLY</span>
+          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-accent ring-1 ring-accent/30"><GraduationCap size={18} /></span>
+          <span className="text-lg tracking-tight font-heading">GRANTLY</span>
         </Link>
         <nav className="hidden items-center gap-1 md:flex" aria-label="Main">
           {links.map((l) => (

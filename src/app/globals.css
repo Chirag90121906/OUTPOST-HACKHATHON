@@ -1,18 +1,22 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f7f8fc;
-  --foreground: #172033;
+  /* Royal Navy + Champagne Gold */
+  --background: #f8f7f2; /* Ivory */
+  --foreground: #252d3a; /* Dark Charcoal */
   --card: #ffffff;
-  --primary: #101b35;
-  --secondary: #3659d9;
-  --accent: #7657e8;
-  --muted: #718096;
-  --border: #e6eaf2;
+  --primary: #101c36; /* Deep Navy */
+  --secondary: #233f70; /* Royal Blue */
+  --accent: #d6b56d; /* Champagne Gold */
+  --muted: #64748b; /* Slate Grey */
+  --border: #e7e3d8;
   --success: #16a36a;
-  --warning: #e9a23b;
+  --warning: #c48a1d;
   --danger: #dc5353;
-  --ring: rgba(54, 89, 217, 0.35);
+  --ring: rgba(214, 181, 109, 0.45);
+  --navy: #101c36;
+  --gold: #d6b56d;
+  --ivory: #f8f7f2;
 }
 
 @theme inline {
@@ -27,23 +31,29 @@
   --color-success: var(--success);
   --color-warning: var(--warning);
   --color-danger: var(--danger);
-  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --color-navy: var(--navy);
+  --color-gold: var(--gold);
+  --color-ivory: var(--ivory);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
 }
 
 * { border-color: var(--border); }
 html { scroll-behavior: smooth; }
 body {
-  background: radial-gradient(1200px 600px at 10% -10%, rgba(54,89,217,.08), transparent 60%),
-              radial-gradient(900px 500px at 100% 0%, rgba(118,87,232,.08), transparent 55%),
+  background: radial-gradient(1200px 600px at 8% -10%, rgba(35,63,112,.07), transparent 58%),
+              radial-gradient(900px 520px at 100% 0%, rgba(214,181,109,.10), transparent 52%),
               var(--background);
   color: var(--foreground);
   min-height: 100vh;
 }
+h1, h2, h3, h4, .font-heading { font-family: var(--font-heading); }
 :focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
-.glass { background: rgba(255,255,255,.72); backdrop-filter: blur(12px); }
-.surface { background: var(--card); border: 1px solid var(--border); box-shadow: 0 8px 30px rgba(16,27,53,.04); }
+.glass { background: rgba(255,255,255,.74); backdrop-filter: blur(12px); }
+.surface { background: var(--card); border: 1px solid var(--border); box-shadow: 0 10px 34px rgba(16,28,54,.05); }
 .text-balance { text-wrap: balance; }
+.gold-glow { box-shadow: 0 0 0 1px rgba(214,181,109,.18), 0 12px 30px rgba(16,28,54,.06); }

@@ -12,10 +12,10 @@ export function Button({ className, variant = "primary", size = "md", ...props }
       className={cn(
         "inline-flex items-center justify-center gap-2 rounded-xl font-semibold transition duration-200 disabled:cursor-not-allowed disabled:opacity-50",
         {
-          "bg-primary text-white hover:bg-[#18294f] shadow-sm": variant === "primary",
-          "bg-secondary text-white hover:bg-[#2f4fc4] shadow-sm": variant === "secondary",
-          "border border-border bg-white text-foreground hover:border-secondary/30 hover:bg-slate-50": variant === "outline",
-          "text-foreground hover:bg-slate-100": variant === "ghost",
+          "bg-secondary text-white hover:bg-[#2c4d86] shadow-sm": variant === "primary",
+          "bg-primary text-accent hover:bg-[#16284d] shadow-sm ring-1 ring-accent/20": variant === "secondary",
+          "border border-border bg-white text-foreground hover:border-accent/40 hover:bg-ivory": variant === "outline",
+          "text-foreground hover:bg-ivory": variant === "ghost",
           "bg-danger text-white hover:bg-red-600": variant === "danger",
           "h-9 px-3 text-sm": size === "sm",
           "h-11 px-4 text-sm": size === "md",

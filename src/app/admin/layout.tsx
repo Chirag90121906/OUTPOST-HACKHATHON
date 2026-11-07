@@ -15,5 +15,5 @@ const nav = [
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const session = await requireSession(["ADMIN"]);
   if (!session) redirect("/login");
-  return <AppShell title="Admin Portal" nav={nav}>{children}</AppShell>;
+  return <AppShell title="Admin Portal" nav={nav} userName={session.name}>{children}</AppShell>;
 }
