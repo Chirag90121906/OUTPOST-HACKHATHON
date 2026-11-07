@@ -1,9 +1,10 @@
 import Link from "next/link";
-import { ArrowRight, BadgeCheck, BellRing, Compass, FileStack, Sparkles, Target, Wallet } from "lucide-react";
+import { ArrowRight, BadgeCheck, BellRing, Compass, FileStack, Search, Sparkles, Target, Wallet } from "lucide-react";
 import { prisma } from "@/lib/db";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
 import { ScholarshipCard } from "@/components/scholarships/scholarship-card";
 
 export const dynamic = "force-dynamic";
@@ -38,40 +39,47 @@ export default async function HomePage() {
 
   return (
     <div>
-      <section className="relative overflow-hidden">
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:items-center lg:px-8 lg:py-24">
-          <div>
-            <Badge tone="info" className="mb-4">Premium scholarship discovery platform</Badge>
-            <h1 className="text-balance text-4xl font-extrabold tracking-tight text-primary sm:text-5xl lg:text-6xl">
-              Your Future Deserves Every Opportunity.
+      <section className="relative overflow-hidden bg-primary text-white">
+        <div className="absolute inset-0 bg-[radial-gradient(900px_420px_at_15%_10%,rgba(35,63,112,.55),transparent_55%),radial-gradient(700px_360px_at_85%_20%,rgba(214,181,109,.18),transparent_55%)]" />
+        <div className="absolute -left-16 top-24 h-40 w-40 rounded-full bg-accent/10 blur-2xl animate-float-soft" aria-hidden />
+        <div className="absolute right-10 top-16 h-24 w-24 rounded-full bg-white/5 blur-xl animate-float-soft" style={{animationDelay:"1.2s"}} aria-hidden />
+        <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:items-center lg:px-8 lg:py-24">
+          <div className="animate-fade-up">
+            <span className="mb-4 inline-flex items-center rounded-full border border-accent/25 bg-white/5 px-3 py-1 text-xs font-semibold text-accent">Premium scholarship discovery platform</span>
+            <h1 className="text-balance font-heading text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+              Your Future Deserves <span className="text-accent">Every Opportunity</span>.
             </h1>
-            <p className="mt-5 max-w-xl text-lg leading-8 text-slate-600">
+            <p className="mt-5 max-w-xl text-lg leading-8 text-white/78">
               Discover scholarships that match your ambitions, simplify your applications and take control of your educational future with GRANTLY.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="/explore"><Button size="lg">Explore Scholarships <ArrowRight size={18} /></Button></Link>
-              <Link href="/register"><Button size="lg" variant="outline">Create Free Account</Button></Link>
+            <form action="/explore" className="mt-7 flex max-w-xl flex-col gap-2 rounded-2xl border border-white/10 bg-white/8 p-2 backdrop-blur sm:flex-row">
+              <div className="flex flex-1 items-center gap-2 rounded-xl bg-white px-3"><Search size={16} className="text-muted"/><Input name="q" placeholder="Search scholarships, courses, providers..." className="border-0 bg-transparent shadow-none focus-visible:outline-none" aria-label="Search scholarships"/></div>
+              <Button type="submit" size="lg" className="bg-accent text-primary hover:bg-[#e1c37d]">Search</Button>
+            </form>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <Link href="/explore"><Button size="lg" variant="outline" className="border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white">Explore Scholarships <ArrowRight size={18} /></Button></Link>
+              <Link href="/register"><Button size="lg" variant="secondary" className="animate-pulse-gold">Get Started</Button></Link>
             </div>
-            <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-slate-600">
-              <span className="flex items-center gap-1.5"><BadgeCheck size={16} className="text-success" /> Explainable matching</span>
-              <span className="flex items-center gap-1.5"><FileStack size={16} className="text-secondary" /> Document checklist</span>
+            <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-white/75">
+              <span className="flex items-center gap-1.5"><BadgeCheck size={16} className="text-accent" /> Explainable matching</span>
+              <span className="flex items-center gap-1.5"><FileStack size={16} className="text-accent" /> Document checklist</span>
               <span className="flex items-center gap-1.5"><BellRing size={16} className="text-accent" /> Deadline reminders</span>
             </div>
           </div>
-          <div className="relative">
-            <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-tr from-secondary/10 via-white to-accent/10 blur-2xl" />
+          <div className="relative animate-fade-up" style={{animationDelay:".12s"}}>
+            <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-tr from-secondary/20 via-transparent to-accent/15 blur-2xl" />
             <div className="relative grid gap-4">
-              <Card className="p-5">
-                <div className="flex items-center justify-between"><div><p className="text-sm text-slate-500">Student dashboard</p><p className="mt-1 text-xl font-semibold">Welcome back, Aarav</p></div><Badge tone="success">78% profile</Badge></div>
+              <Card className="border-white/10 bg-white/95 p-5 text-foreground shadow-2xl">
+                <div className="flex items-center justify-between"><div><p className="text-sm text-muted">Student dashboard</p><p className="mt-1 font-heading text-xl font-semibold">Welcome back, Aarav</p></div><Badge tone="success">78% profile</Badge></div>
                 <div className="mt-5 grid grid-cols-3 gap-3">
                   {[["Matches", "12"], ["Saved", "5"], ["Applied", "3"]].map(([k,v]) => (
-                    <div key={k} className="rounded-xl bg-slate-50 p-3"><div className="text-xs text-slate-500">{k}</div><div className="mt-1 text-lg font-semibold">{v}</div></div>
+                    <div key={k} className="rounded-xl bg-ivory p-3"><div className="text-xs text-muted">{k}</div><div className="mt-1 text-lg font-semibold">{v}</div></div>
                   ))}
                 </div>
               </Card>
               <div className="grid gap-4 sm:grid-cols-2">
-                <Card className="p-5"><div className="flex items-center gap-2 text-sm font-medium"><Sparkles size={16} className="text-secondary" /> Strong match</div><p className="mt-2 text-sm text-slate-600">Your CGPA and course align with listed criteria. Income eligibility needs verification.</p></Card>
-                <Card className="p-5"><div className="flex items-center gap-2 text-sm font-medium"><Target size={16} className="text-accent" /> Application tracker</div><div className="mt-3 h-2 rounded-full bg-slate-100"><div className="h-2 w-2/3 rounded-full bg-gradient-to-r from-secondary to-accent" /></div><p className="mt-2 text-xs text-slate-500">Submitted → Under Review</p></Card>
+                <Card className="border-white/10 bg-white/95 p-5 text-foreground"><div className="flex items-center gap-2 text-sm font-medium"><Sparkles size={16} className="text-accent" /> Strong match</div><p className="mt-2 text-sm text-muted">Your CGPA and course align. Income eligibility needs verification.</p></Card>
+                <Card className="border-white/10 bg-white/95 p-5 text-foreground"><div className="flex items-center gap-2 text-sm font-medium"><Target size={16} className="text-secondary" /> Application tracker</div><div className="mt-3 h-2 rounded-full bg-ivory"><div className="h-2 w-2/3 rounded-full bg-gradient-to-r from-secondary to-accent" /></div><p className="mt-2 text-xs text-muted">Submitted → Under Review</p></Card>
               </div>
             </div>
           </div>

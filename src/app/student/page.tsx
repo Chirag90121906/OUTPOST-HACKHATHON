@@ -8,6 +8,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { AssistantPanel } from "@/components/dashboard/assistant";
+import { AchievementUnlock } from "@/components/dashboard/achievement-unlock";
+import { MatchRadarVisual } from "@/components/dashboard/match-radar-visual";
 
 export const dynamic = "force-dynamic";
 
@@ -91,6 +93,7 @@ export default async function StudentDashboard() {
 
   return (
     <div className="space-y-6">
+      <AchievementUnlock data={{ completion, saved, apps: apps.length, docs: docs.length }} />
       <section className="rounded-[1.75rem] border bg-gradient-to-br from-primary via-[#16284d] to-secondary p-6 text-white shadow-[0_20px_50px_rgba(16,28,54,.18)] sm:p-8">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div>
@@ -125,6 +128,7 @@ export default async function StudentDashboard() {
       <section className="grid gap-6 xl:grid-cols-[1.2fr_.8fr]">
         <Card className="p-5 sm:p-6">
           <div className="flex items-center justify-between gap-3"><div><h3 className="font-heading text-lg font-semibold flex items-center gap-2"><Radar size={18} className="text-secondary"/> Scholarship Match Radar</h3><p className="text-sm text-muted">Transparent matches from your profile. Scores never override failed mandatory criteria.</p></div><Link href="/student/recommended" className="text-sm font-medium text-secondary">View all</Link></div>
+          <div className="mt-5"><MatchRadarVisual strong={strong.filter(x=>x.m.status==="Eligible").length} potential={strong.filter(x=>x.m.status!=="Eligible").length + potential.length} closing={closingSoon.length} missingInfo={matches.filter(x=>x.m.status==="Insufficient Information"||x.m.missing.length>0).length} /></div>
           <div className="mt-5 grid gap-3">
             {matches.slice(0, 4).map(({ s, m }) => (
               <Link key={s.id} href={`/scholarships/${s.id}`} className="rounded-xl border p-4 transition hover:border-accent/30 hover:bg-ivory/50">

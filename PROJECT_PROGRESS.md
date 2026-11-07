@@ -14,10 +14,18 @@
 - [x] `npx tsc --noEmit` and `npm run build` (Postgres env vars set for build context) **passed**
 - [x] Committed and pushed to GitHub
 
+## Latest pass (ultimate transformation)
+- [x] Premium hero: Deep Navy background, royal-blue/gold gradients, gold-highlighted heading, floating elements, functional scholarship search bar, entrance animations (reduced-motion aware)
+- [x] Signature visuals: SVG Scholarship Match Radar visualization on dashboard (real counts, transparent), achievement unlock toast derived from genuine milestones (local seen-state)
+- [x] Mobile/responsive: student mobile bottom navigation, safe-area padding, responsive dashboard/cards; command palette (`Ctrl/Cmd+K`) in app shell
+- [x] Micro-interactions/animation: CSS transitions, fade-up/float/pulse utilities, hover elevations, sidebar transitions, skeleton-friendly patterns; Framer Motion installed for extension
+- [x] Verification: `tsc --noEmit` and `npm run build` passed; pushed to GitHub
+- [x] Vercel: CLI preview deployed to `bhanushalichirag02-1848/grantly` (READY, Vercel Authentication protected, **dummy DB env vars** so DB features limited) — https://grantly-h4bilqtti-bhanushalichirag02-1848.vercel.app (verified landing renders via `vercel curl`). GitHub-connected production project (if configured) should auto-deploy from `main` with real Postgres/env vars.
+
 ## Honest remaining gaps
-- OCR, real LLM-backed copilot API, multilingual (EN/HI/GU), community/mentorship, global command palette, full provider/admin depth, exports, PWA, and full 40+ deep workflows are partial/not implemented.
-- Formal Lighthouse/Core Web Vitals, full WCAG 2.2 AA audit, cross-device screenshot QA, and dependency security remediation not fully executed here.
-- Vercel deployment status cannot be verified by agent (no Vercel auth). Pushes to `main` should auto-deploy if Vercel project + Postgres + env vars are configured.
+- Full OCR authenticity claims avoided (OCR not implemented); no real LLM copilot API configured; multilingual EN/HI/GU not implemented; community/mentorship/moderation depth limited; drag-and-drop Kanban persistence/backend for all pipeline states partial; full 40+ deep workflows not all production-complete.
+- Formal Lighthouse/Core Web Vitals, full WCAG 2.2 AA audit, device screenshot matrix, and dependency security remediation not fully executed here.
+- Agent cannot verify the user’s GitHub-connected Vercel production project without dashboard access; preview CLI deploy uses placeholder DB env vars.
 
 ## Completed foundation
 - [x] Empty workspace audited; new Next.js 15 + TS + Tailwind v4 + Prisma (Postgres/Vercel Postgres config) app created
