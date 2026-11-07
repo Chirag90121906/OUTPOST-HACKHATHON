@@ -36,7 +36,7 @@ export default async function ExplorePage({ searchParams }: { searchParams: Prom
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
       <div className="max-w-3xl">
         <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Explore scholarships</h1>
-        <p className="mt-2 text-slate-600">Search and filter opportunities. Sample listings are labeled clearly and should be verified on official sources.</p>
+        <p className="mt-2 text-muted">Search and filter opportunities. Sample listings are labeled clearly and should be verified on official sources.</p>
       </div>
       <Card className="mt-8 p-4 sm:p-5">
         <form className="grid gap-3 lg:grid-cols-[1fr_180px_180px_180px_180px_auto]" action="/explore">
@@ -48,12 +48,12 @@ export default async function ExplorePage({ searchParams }: { searchParams: Prom
           <div className="flex gap-2"><Button type="submit">Search</Button><Link href="/explore"><Button type="button" variant="outline">Clear</Button></Link></div>
         </form>
       </Card>
-      {!loadError && <div className="mt-6 flex items-center justify-between text-sm text-slate-600"><span>{items.length} result{items.length === 1 ? "" : "s"}</span></div>}
+      {!loadError && <div className="mt-6 flex items-center justify-between text-sm text-muted"><span>{items.length} result{items.length === 1 ? "" : "s"}</span></div>}
       <div className="mt-6 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
         {items.map((s) => <ScholarshipCard key={s.id} s={s} />)}
       </div>
-      {loadError && <Card role="alert" className="mt-6 p-10 text-center text-slate-600">Scholarships could not be loaded right now. Please try again later.</Card>}
-      {!loadError && items.length === 0 && <Card className="mt-6 p-10 text-center text-slate-600">No scholarships matched your filters. Try clearing filters or running the demo seed.</Card>}
+      {loadError && <Card role="alert" className="mt-6 p-10 text-center text-muted">Scholarships could not be loaded right now. Please try again later.</Card>}
+      {!loadError && items.length === 0 && <Card className="mt-6 p-10 text-center text-muted">No scholarships matched your filters. Try clearing filters or running the demo seed.</Card>}
     </div>
   );
 }

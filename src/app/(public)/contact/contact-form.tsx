@@ -18,7 +18,7 @@ export function ContactForm() {
       <div className="grid gap-4 sm:grid-cols-2"><div><Label htmlFor="name">Name</Label><Input id="name" name="name" /></div><div><Label htmlFor="email">Email</Label><Input id="email" name="email" type="email" /></div></div>
       <div><Label htmlFor="subject">Subject</Label><Input id="subject" name="subject" required /></div>
       <div><Label htmlFor="message">Message</Label><Textarea id="message" name="message" rows={5} required /></div>
-      {msg && <p className="text-sm text-slate-700">{msg}</p>}
+      {msg && <p className="text-sm text-foreground">{msg}</p>}
       <Button type="submit" disabled={loading}>{loading ? "Sending..." : "Submit"}</Button>
     </form>
   );
